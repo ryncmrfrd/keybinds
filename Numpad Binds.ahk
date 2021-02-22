@@ -4,7 +4,25 @@
 SendMode Input
 SetWorkingDir %A_ScriptDir%
 
+DetectHiddenWindows, On
+
 toggle := true
+
+; SPOTIFY FUNCTIONS
+
+getSpotifyHwnd() {
+	WinGet, spotifyHwnd, ID, ahk_exe spotify.exe
+	spotifyHwnd := DllCall("GetWindow", "uint", spotifyHwnd, "uint", 2)
+	spotifyHwnd := DllCall("GetWindow", "uint", spotifyHwnd, "uint", 2)
+	Return spotifyHwnd
+}
+
+spotifyKey(key) {
+	spotifyHwnd := getSpotifyHwnd()
+	ControlFocus, Chrome_RenderWidgetHostHWND1, ahk_id %spotifyHwnd%
+	ControlSend, , %key%, ahk_id %spotifyHwnd%
+	Return
+}
 
 ; DISCORD CONTROLS
 
@@ -24,11 +42,13 @@ return
 
 Numpad8::
 NumpadUp::
-	if WinExist("ahk_exe Spotify.exe")
-		WinActivate, ahk_exe Spotify.exe
+	IfWinExist ahk_class SpotifyMainWindow {
+		ifWinActive ahk_class SpotifyMainWindow
+			WinMinimize
+		else
+			WinActivate
 	else
-		RunWait C:\Users\Ryan Comerford\AppData\Roaming\Spotify\Spotify.exe
-		WinActivate
+		run "C:\Users\Ryan Comerford\AppData\Roaming\Spotify\Spotify.exe"
 return
 
 Numpad4::
@@ -58,16 +78,22 @@ NumpadPgUp::
 		Send {Ctrl up}, {w up}
 return
 
-; VOLUME CONTROLS
+; VOLUME CONTROLS (SPOTIFY)
 
 Numpad6::
-NumpadRight::Send {Volume_Up}
+NumpadRight::
+	spotifyKey("^{Up}")
+return
 
 NumpadPgDn::
-Numpad3::Send {Volume_Down}
+Numpad3::
+	spotifyKey("^{Down}")
+return
 
 NumpadDel::
-NumpadDot::Send {Volume_Mute}
+NumpadDot::
+	spotifyKey("^+{Down}")
+return
 
 ; MEDIA CONTROLS
 
