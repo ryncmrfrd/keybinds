@@ -6,8 +6,6 @@ SetWorkingDir %A_ScriptDir%
 
 DetectHiddenWindows, On
 
-toggle := true
-
 ; SPOTIFY FUNCTIONS
 
 getSpotifyHwnd() {
@@ -29,76 +27,24 @@ spotifyKey(key) {
 NumpadAdd::Send {F14}
 NumpadEnter::Send {F13}
 
-; PROGRAM BINDS
-
-Numpad7::
-NumpadHome::
-	if WinExist("C:\Program Files (x86)\GOG Galaxy\GalaxyClient.exe")
-		WinActivate, ahk_exe GalaxyClient.exe
-	else
-		RunWait C:\Program Files (x86)\GOG Galaxy\GalaxyClient.exe
-		WinActivate
-return
+; VOLUME CONTROLS (SPOTIFY)
 
 Numpad8::
 NumpadUp::
-	IfWinExist ahk_class SpotifyMainWindow {
-		ifWinActive ahk_class SpotifyMainWindow
-			WinMinimize
-		else
-			WinActivate
-	else
-		run "C:\Users\Ryan Comerford\AppData\Roaming\Spotify\Spotify.exe"
-return
-
-Numpad4::
-NumpadLeft::
-	RunWait C:\Program Files (x86)\Google\Chrome\Application\chrome.exe --profile-directory="Profile 2",, Max
-	WinActivate
-	WinMaximize
-return
-
-Numpad5::
-NumpadClear::
-	if WinExist("ahk_exe Discord.exe")
-		WinActivate, ahk_exe Discord.exe
-	else
-		RunWait "C:\Users\Ryan Comerford\AppData\Local\Discord\Update.exe" --processStart="Discord.exe"
-		WinActivate
-return
-
-; MC AUTORUN
-
-Numpad9::
-NumpadPgUp::
-	toggle := !toggle
-	if !toggle
-		Send {Ctrl down}, {w down}
-	else
-		Send {Ctrl up}, {w up}
-return
-
-; VOLUME CONTROLS (SPOTIFY)
-
-Numpad6::
-NumpadRight::
-	spotifyKey("^{Up}")
-return
-
-NumpadPgDn::
-Numpad3::
 	spotifyKey("^{Down}")
 return
 
-NumpadDel::
-NumpadDot::
-	spotifyKey("^+{Down}")
+Numpad9::
+NumpadPgUp::
+	spotifyKey("^{Up}")
 return
 
 ; MEDIA CONTROLS
 
 Numpad0::
-NumpadIns::Send {Media_Play_Pause}
+NumpadIns::
+	Send {Media_Play_Pause}
+return
 
 Numpad1::
 NumpadEnd::Send {Media_Prev}
