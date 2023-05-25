@@ -1,4 +1,9 @@
-# Numpad Keybinds ⌨️
-The [AutoHotKey](https://www.autohotkey.com/) code (+ exe) used to bind my [external numpad](https://en.varmilo.com/keyboardproscenium/product_indexsubject?layout=20&model=Theme%20keyboard) to media, volume, and discord binds.
+# ⌨️ Autohotkey Numpad Keybinds
 
-## Streaming version of .ahk & .exe file makes it act more like a streamdeck.
+Inspired by [Taran Van Hermert](https://www.youtube.com/@TaranVH), and more specifically [this video](https://www.youtube.com/watch?v=Arn8ExQ2Gjg), I wrote this short script so I could use my external numpad as a macro keyboard. These macros are:
+
+* 🎙️ Discord mute/deaden
+* 🎶 Spotify-specific volume adjustment
+* ⏯️ Media keys (play/pause, next, previous)
+
+> Being my first experience with [AutoHotKey](https://www.autohotkey.com/), this script isn't my best work, but it does what is says on the tin, and that's all I need. I may add some more features in future to reflect my changing needs (eg. program launches, VS code functions), but for now it works.
